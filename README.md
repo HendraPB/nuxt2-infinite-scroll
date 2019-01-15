@@ -17,4 +17,7 @@ yarn dev
 ```
 
 ## Demo
-https://playground-omdb.firebaseapp.com
+https://playground-omdb.firebaseapp.com/
+
+## How to deploy
+https://github.com/HendraPB/nuxt2-ssr-firebase
