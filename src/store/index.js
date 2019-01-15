@@ -28,8 +28,10 @@ const createStore = () => {
               state.film.push(item)
             })
           }
-          else if(state.page < 2)
+          else if(state.page < 2){
             state.error = data.Error
+            state.leng = 0
+          }
           state.genre = temp
         })
       },
