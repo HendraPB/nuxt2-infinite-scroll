@@ -42,7 +42,7 @@ export default {
   methods : {
     scroll (film) {
       window.onscroll = () => {
-        if (document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight && this.$store.state.leng > 9) {
+        if (document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight - 1 && this.$store.state.leng > 9) {
           this.$store.commit('nextPage')
           this.$store.commit('getFilm')
         }
