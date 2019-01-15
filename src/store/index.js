@@ -16,7 +16,7 @@ const createStore = () => {
       getFilm (state) {
         let temp = state.genre
         state.genre = ''
-        return axios('http://www.omdbapi.com/?apikey=9cdf600&s='+state.title+'&type='+temp+'&y='+state.year+'&page='+state.page)
+        return axios('https://www.omdbapi.com/?apikey=9cdf600&s='+state.title+'&type='+temp+'&y='+state.year+'&page='+state.page)
         .then(({ data }) => {
           if(data.Response != "False"){
             state.error = false,

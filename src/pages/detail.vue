@@ -23,7 +23,7 @@ export default {
     }
   },
   mounted () {
-    axios('http://www.omdbapi.com/?apikey=9cdf600&i='+this.$store.state.id)
+    axios('https://www.omdbapi.com/?apikey=9cdf600&i='+this.$store.state.id)
     .then(({ data }) => {
       if(data.Poster == "N/A")
         data.Poster = "/no_image.jpg"
