@@ -32,6 +32,8 @@ const createStore = () => {
             state.error = data.Error
             state.leng = 0
           }
+          else
+            state.leng = 0
           state.genre = temp
         })
       },
