@@ -18,16 +18,9 @@
 <script>
 import axios from 'axios'
 export default {
-  data () {
-    return {
-      first: 0,
-      last: 0
-    }
-  },
   mounted () {
     this.$store.commit('resetPage')
     this.$store.commit('getFilm')
-    this.first = this.last = this.$store.state.film.length
     this.scroll(this.$store.state.film)
   },
   computed: {
@@ -49,10 +42,9 @@ export default {
   methods : {
     scroll (film) {
       window.onscroll = () => {
-        if (document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight && this.first == this.last) {
-          this.$store.commit('nextPage');
-          this.$store.commit('getFilm');
-          this.last = this.$store.state.film.length
+        if (document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight && this.$store.state.leng > 9) {
+          this.$store.commit('nextPage')
+          this.$store.commit('getFilm')
         }
       };
     },

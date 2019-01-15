@@ -11,6 +11,7 @@ const createStore = () => {
       genre: '',
       year: '',
       page: 1,
+      leng: 10
     },
     mutations: {
       getFilm (state) {
@@ -20,6 +21,7 @@ const createStore = () => {
         .then(({ data }) => {
           if(data.Response != "False"){
             state.error = false,
+            state.leng = data.Search.length
             data.Search.map((item, key) => {
               if(item.Poster == "N/A")
                 item.Poster = "/no_image.jpg"
