@@ -1,8 +1,8 @@
 <template>
   <main class="content">
       <section class="centered">
-        <h3 v-if="error">{{ error }}</h3>
-        <h3 v-else :hidden="genre == ''">{{ genre }}</h3>
+        <h3 v-if="genre != ''">{{ genre }}</h3>
+        <h4 v-if="error">{{ error }}</h4>
         <div class="movies">
           <div class="mov" v-for="item in films" v-bind:key="item.key" @click="openDetail(item.imdbID)">
             <a href="#">
@@ -32,17 +32,17 @@ export default {
     },
     genre () {
       return this.$store.state.genre.replace(
-          /\w\S*/g,
-          function(txt) {
-              return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-          }
+        /\w\S*/g,
+        function(txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        }
       )
     }
   },
   methods : {
     scroll (film) {
       window.onscroll = () => {
-        if (document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight - 1 && this.$store.state.leng > 9) {
+        if ((document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight - 1 && this.$store.state.leng > 9) || !this.$store.state.leng) {
           this.$store.commit('nextPage')
           this.$store.commit('getFilm')
         }
@@ -55,3 +55,19 @@ export default {
   }, 
 }
 </script>
+<style scoped>
+  h4 {
+    padding: 20px 10px;
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 14px;
+  }
+  h3 {
+    display: none;
+  }
+  @media (max-width: 1024px){
+    h3 {
+      display: block;
+    }
+  }
+</style>

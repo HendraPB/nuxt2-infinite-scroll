@@ -11,13 +11,11 @@ const createStore = () => {
       genre: '',
       year: '',
       page: 1,
-      leng: 10
+      leng: false
     },
     mutations: {
       getFilm (state) {
-        let temp = state.genre
-        state.genre = ''
-        return axios('https://www.omdbapi.com/?apikey=9cdf600&s='+state.title+'&type='+temp+'&y='+state.year+'&page='+state.page)
+        return axios('https://www.omdbapi.com/?apikey=9cdf600&s='+state.title+'&type='+state.genre+'&y='+state.year+'&page='+state.page)
         .then(({ data }) => {
           if(data.Response != "False"){
             state.error = false,
@@ -34,7 +32,6 @@ const createStore = () => {
           }
           else
             state.leng = 0
-          state.genre = temp
         })
       },
       resetFilm (state) {
