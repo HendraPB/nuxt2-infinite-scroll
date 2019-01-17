@@ -1,6 +1,6 @@
 {
   "name": "nuxt2-infinite-scroll",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "HendraPB hendrapratama1493@gmail.com",
   "description": "Infinite scroll implementation on vue.js use OMDb API",
   "repository": "https://github.com/HendraPB/nuxt2-infinite-scroll",
