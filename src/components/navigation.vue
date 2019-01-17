@@ -1,9 +1,9 @@
 <template>
   <header class="header">
-    <figure class="logo"><a href="#" @click="goHome('')"><img src="/logo.png" alt="Logo"></a></figure>
+    <figure class="logo"><a href="#" @click="goHome('', true)"><img src="/logo.png" alt="Logo"></a></figure>
     <nav class="menu">
       <ul>
-        <li><a href="#" class="home" @click="goHome('')">Home</a></li>
+        <li><a href="#" class="home" @click="goHome('', true)">Home</a></li>
         <li class="mobsearch">
           <div class="mobform">
             <input type="text" class="mobsearchfield" placeholder="Search" v-model="mobSearch" @change="goHome(false)">
@@ -70,7 +70,11 @@ export default {
     }
   },
   methods : {
-    goHome (genre) {
+    goHome (genre, reset = false) {
+      if(reset){
+        this.$store.commit('setTitle', '')
+        this.$store.commit('setYear', '')
+      }
       if(genre !== false)
         this.$store.commit('setGenre', genre)
       this.$store.commit('resetFilm')
