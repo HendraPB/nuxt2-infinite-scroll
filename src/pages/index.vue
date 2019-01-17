@@ -11,6 +11,9 @@
           </a>
         </div>
       </div>
+      <div v-if="loading" class="center">
+        <img src="loading.gif">
+      </div>
     </section>
   </main>
 </template>
@@ -27,6 +30,9 @@ export default {
     },
     error () {
       return this.$store.state.error
+    },
+    loading () {
+      return this.$store.state.loading
     },
     genre () {
       return this.$store.state.genre.replace(
@@ -62,6 +68,9 @@ export default {
   }
   h3 {
     display: none;
+  }
+  .center {
+    text-align: center;
   }
   @media (max-width: 1024px){
     h3 {

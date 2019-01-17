@@ -6,6 +6,7 @@ const createStore = () => {
     state: {
       films: [],
       error: false,
+      loading: false,
       id: '',
       title: 'marvel',
       genre: '',
@@ -22,7 +23,8 @@ const createStore = () => {
     },
     mutations: {
       getFilms (state) {
-        return axios('https://www.omdbapi.com/?apikey=9cdf600&s='+state.title+'&type='+state.genre+'&y='+state.year+'&page='+state.page)
+        state.loading = true
+        axios('https://www.omdbapi.com/?apikey=9cdf600&s='+state.title+'&type='+state.genre+'&y='+state.year+'&page='+state.page)
         .then(({ data }) => {
           if(data.Response != "False"){
             state.error = false,
@@ -37,6 +39,7 @@ const createStore = () => {
             }
             state.leng = 0
           }
+          state.loading = false
         })
       },
       resetFilm (state) {
