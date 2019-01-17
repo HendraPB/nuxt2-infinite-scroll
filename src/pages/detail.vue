@@ -19,7 +19,9 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      data: {}
+      data: {
+        Poster: 'lazy_loader.gif'
+      }
     }
   },
   mounted () {
