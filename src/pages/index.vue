@@ -16,16 +16,14 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   mounted () {
-    this.$store.commit('resetPage')
-    this.$store.commit('getFilm')
-    this.scroll(this.$store.state.film)
+    this.$store.commit('getFilms')
+    this.scroll(this.films)
   },
   computed: {
     films () {
-      return this.$store.state.film
+      return this.$store.state.films
     },
     error () {
       return this.$store.state.error
@@ -44,7 +42,7 @@ export default {
       window.onscroll = () => {
         if ((document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight - 1 && this.$store.state.leng > 9) || !this.$store.state.leng) {
           this.$store.commit('nextPage')
-          this.$store.commit('getFilm')
+          this.$store.commit('getFilms')
         }
       };
     },

@@ -4,17 +4,24 @@ import axios from 'axios'
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      film: [],
+      films: [],
       error: false,
       id: '',
       title: 'marvel',
       genre: '',
+      genres: {
+        '': 'All Genre' ,
+        'movie': 'Movie',
+        'series': 'Series',
+        'episode': 'Episode',
+        'games': 'Games'
+      },
       year: '',
       page: 1,
       leng: false
     },
     mutations: {
-      getFilm (state) {
+      getFilms (state) {
         return axios('https://www.omdbapi.com/?apikey=9cdf600&s='+state.title+'&type='+state.genre+'&y='+state.year+'&page='+state.page)
         .then(({ data }) => {
           if(data.Response != "False"){
@@ -23,19 +30,19 @@ const createStore = () => {
             data.Search.map((item, key) => {
               if(item.Poster == "N/A")
                 item.Poster = "/no_image.jpg"
-              state.film.push(item)
+              state.films.push(item)
             })
           }
-          else if(state.page < 2){
-            state.error = data.Error
+          else{
+            if(state.page < 2){
+              state.error = data.Error
+            }
             state.leng = 0
           }
-          else
-            state.leng = 0
         })
       },
       resetFilm (state) {
-        state.film = [];
+        state.films = [];
       },
       setId (state, data) {
         state.id = data
