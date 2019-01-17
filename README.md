@@ -1,5 +1,5 @@
 # nuxt2-infinite-scroll
-Infinite scroll implementation on vue.js use OMDb API.
+Infinite scroll implementation on Vue.js with Vue-Lazyload plugin in Nuxt.js 2 use OMDb API.
 
 ## Installation
 ``` bash
