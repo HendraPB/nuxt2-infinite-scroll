@@ -73,7 +73,7 @@ export default {
     goHome (genre) {
       if(genre !== false)
         this.$store.commit('setGenre', genre)
-        this.$store.commit('resetFilm')
+      this.$store.commit('resetFilm')
       if($nuxt.$route.path == '/'){
         this.$store.commit('resetPage')
         this.$store.commit('getFilm')
