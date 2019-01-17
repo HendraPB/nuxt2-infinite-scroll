@@ -72,8 +72,10 @@ export default {
   methods : {
     goHome (genre, reset = false) {
       if(reset){
-        this.$store.commit('setTitle', 'marvel')
-        this.$store.commit('setYear', '')
+        this.search = 'marvel'
+        this.year = ''
+        this.$store.commit('setTitle', this.search)
+        this.$store.commit('setYear', this.year)
       }
       if(genre !== false)
         this.$store.commit('setGenre', genre)
