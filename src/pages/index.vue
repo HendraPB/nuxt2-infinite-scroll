@@ -6,7 +6,7 @@
       <div class="movies">
         <div class="mov" v-for="item in films" v-bind:key="item.key" @click="openDetail(item.imdbID)">
           <a href="#">
-            <img :src="item.Poster">
+            <img v-lazy="item.Poster">
             <h2 class="movietitle">{{ item.Title }}</h2>
           </a>
         </div>

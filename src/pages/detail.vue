@@ -2,7 +2,7 @@
   <main class="content">
     <div class="single">
       <section class="movie">
-        <img :src="data.Poster">
+        <img v-lazy="data.Poster">
         <ul>
           <li>{{ data.Title }}</li>
           <li>{{ data.Plot }}</li>
@@ -25,8 +25,6 @@ export default {
   mounted () {
     axios('https://www.omdbapi.com/?apikey=9cdf600&i='+this.$store.state.id)
     .then(({ data }) => {
-      if(data.Poster == "N/A")
-        data.Poster = "/no_image.jpg"
       this.data = data
     })
   }
