@@ -21,7 +21,7 @@ module.exports = {
   ** Custom Plugin
   */
   plugins: [
-    { src: '~plugins/lazyload.js', ssr: false }
+    { src: '~plugins/lazyload.js' }
   ],
   /*
   ** Customize the progress bar color
