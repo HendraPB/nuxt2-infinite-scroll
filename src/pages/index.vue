@@ -1,18 +1,18 @@
 <template>
   <main class="content">
-      <section class="centered">
-        <h3 v-if="genre != ''">{{ genre }}</h3>
-        <h4 v-if="error">{{ error }}</h4>
-        <div class="movies">
-          <div class="mov" v-for="item in films" v-bind:key="item.key" @click="openDetail(item.imdbID)">
-            <a href="#">
-              <img :src="item.Poster">
-              <h2 class="movietitle">{{ item.Title }}</h2>
-            </a>
-          </div>
+    <section class="centered">
+      <h3 v-if="genre != ''">{{ genre }}</h3>
+      <h4 v-if="error">{{ error }}</h4>
+      <div class="movies">
+        <div class="mov" v-for="item in films" v-bind:key="item.key" @click="openDetail(item.imdbID)">
+          <a href="#">
+            <img :src="item.Poster">
+            <h2 class="movietitle">{{ item.Title }}</h2>
+          </a>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+  </main>
 </template>
 
 <script>
