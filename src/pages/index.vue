@@ -69,5 +69,8 @@ export default {
     h3 {
       display: block;
     }
+    h4 {
+      text-align: center;
+    }
   }
 </style>
