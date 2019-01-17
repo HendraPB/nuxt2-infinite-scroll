@@ -28,8 +28,6 @@ const createStore = () => {
             state.error = false,
             state.leng = data.Search.length
             data.Search.map((item, key) => {
-              if(item.Poster == "N/A")
-                item.Poster = "/no_image.jpg"
               state.films.push(item)
             })
           }
