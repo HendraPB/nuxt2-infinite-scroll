@@ -72,7 +72,7 @@ export default {
   methods : {
     goHome (genre, reset = false) {
       if(reset){
-        this.$store.commit('setTitle', '')
+        this.$store.commit('setTitle', 'marvel')
         this.$store.commit('setYear', '')
       }
       if(genre !== false)

@@ -7,7 +7,7 @@ const createStore = () => {
       film: [],
       error: false,
       id: '',
-      title: 'default',
+      title: 'marvel',
       genre: '',
       year: '',
       page: 1,
