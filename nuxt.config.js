@@ -18,6 +18,12 @@ module.exports = {
     ]
   },
   /*
+  ** Custom Plugin
+  */
+  plugins: [
+    { src: '~plugins/lazyload.js', ssr: false }
+  ],
+  /*
   ** Customize the progress bar color
   */
   loading: { color: '#3B8070' },
