@@ -29,3 +29,9 @@ export default {
   }
 }
 </script>
+<style>
+  .center {
+    text-align: center;
+    width: 100%;
+  }
+</style>

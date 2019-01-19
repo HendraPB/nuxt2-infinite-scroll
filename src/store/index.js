@@ -1,13 +1,11 @@
 import Vuex from 'vuex'
-import axios from 'axios'
+import axios from '~/plugins/axios'
 
 const createStore = () => {
   return new Vuex.Store({
     state: {
       films: [],
       error: false,
-      loading: false,
-      id: '',
       title: 'marvel',
       genre: '',
       genres: {
@@ -19,34 +17,31 @@ const createStore = () => {
       },
       year: '',
       page: 1,
-      leng: false
+      leng: false,
+      film: false
     },
     mutations: {
-      getFilms (state) {
-        state.loading = true
-        axios('https://www.omdbapi.com/?apikey=9cdf600&s='+state.title+'&type='+state.genre+'&y='+state.year+'&page='+state.page)
-        .then(({ data }) => {
-          if(data.Response != "False"){
-            state.error = false,
-            state.leng = data.Search.length
-            data.Search.map((item, key) => {
-              state.films.push(item)
-            })
+      async getFilms (state) {
+        const items = await axios({ params: {
+            s: state.title,
+            type: state.genre,
+            y: state.year,
+            page: state.page
+        }})
+        if(items.data.Response != "False"){
+          state.films = state.films.concat(items.data.Search)
+          state.error = false,
+          state.leng = items.data.Search.length
+        }
+        else{
+          if(state.page < 2){
+            state.error = items.data.Error
           }
-          else{
-            if(state.page < 2){
-              state.error = data.Error
-            }
-            state.leng = 0
-          }
-          state.loading = false
-        })
+          state.leng = 0
+        }
       },
-      resetFilm (state) {
+      resetFilms (state) {
         state.films = [];
-      },
-      setId (state, data) {
-        state.id = data
       },
       setTitle (state, data) {
         state.title = data
@@ -62,6 +57,15 @@ const createStore = () => {
       },
       nextPage (state) {
         state.page++
+      },
+      async setFilm (state, data) {
+        const item = await axios({ params: {
+          i: data
+        }})
+        state.film = item.data
+      },
+      resetFilm (state) {
+        state.film = false
       }
     }
   })
