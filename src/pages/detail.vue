@@ -1,34 +1,28 @@
 <template>
   <main class="content">
     <div class="single">
-      <section class="movie">
-        <img v-lazy="data.Poster">
+      <section class="movie" v-if="item">
+        <img v-lazy="item.Poster">
         <ul>
-          <li>{{ data.Title }}</li>
-          <li>{{ data.Plot }}</li>
-          <li>{{ data.Genre }}</li>
-          <li>{{ data.Runtime }}</li>
+          <li>{{ item.Title }}</li>
+          <li>{{ item.Plot }}</li>
+          <li>{{ item.Genre }}</li>
+          <li>{{ item.Runtime }}</li>
         </ul>
       </section>
+      <div v-else class="center">
+        <img src="loading.gif">
+      </div>
     </div>
   </main>
 </template>
 
 <script>
-import axios from 'axios'
 export default {
-  data () {
-    return {
-      data: {
-        Poster: 'lazy_loader.gif'
-      }
+  computed: {
+    item () {
+      return this.$store.state.film
     }
-  },
-  mounted () {
-    axios('https://www.omdbapi.com/?apikey=9cdf600&i='+this.$store.state.id)
-    .then(({ data }) => {
-      this.data = data
-    })
   }
 }
 </script>

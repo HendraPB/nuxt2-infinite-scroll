@@ -18,6 +18,12 @@ module.exports = {
     ]
   },
   /*
+  ** Custom Env
+  */
+  env: {
+    baseUrl: process.env.BASE_URL || 'https://www.omdbapi.com/?apikey=9cdf600'
+  },
+  /*
   ** Custom Plugin
   */
   plugins: [
