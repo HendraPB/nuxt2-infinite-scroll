@@ -3,15 +3,15 @@
     <section class="centered">
       <h3 v-if="genre != ''">{{ genre }}</h3>
       <h4 v-if="error">{{ error }}</h4>
-      <div class="movies" v-if="films.length > 0 || error">
-        <div class="mov" v-for="item in films" v-bind:key="item.key" @click="openDetail(item.imdbID)">
+      <div class="movies">
+        <div class="mov" v-for="item in films" @click="openDetail(item.imdbID)">
           <a href="#">
             <img v-lazy="item.Poster">
             <h2 class="movietitle">{{ item.Title }}</h2>
           </a>
         </div>
       </div>
-      <div v-else class="center">
+      <div v-if="load" class="center">
         <img src="loading.gif">
       </div>
     </section>
@@ -37,17 +37,19 @@ export default {
     },
     leng () {
       return this.$store.state.leng
+    },
+    load () {
+      return this.$store.state.load
     }
   },
   mounted () {
     this.$store.commit('getFilms')
-    this.scroll(this.films)
+    this.scroll()
   },
   methods : {
-    scroll (film) {
+    scroll () {
       window.onscroll = () => {
-        if ((document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight - 1 && this.leng > 9) || !this.leng) {
-          this.$store.commit('nextPage')
+        if ((document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight - 1 && this.leng > 9 && !this.load) || this.leng === false) {
           this.$store.commit('getFilms')
         }
       };
@@ -60,7 +62,7 @@ export default {
   }, 
 }
 </script>
-<style scoped>
+<style>
   h4 {
     padding: 20px 10px;
     margin-bottom: 10px;
