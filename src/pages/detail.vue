@@ -20,12 +20,19 @@
 
 <script>
 export default {
+  mounted () {
+    if(this.load === true)
+      this.$router.replace({ 'path' : '/' })
+  },
   computed: {
     item () {
       return this.$store.state.film
     },
     error () {
       return this.$store.state.error
+    },
+    load () {
+      return this.$store.state.load
     }
   }
 }
