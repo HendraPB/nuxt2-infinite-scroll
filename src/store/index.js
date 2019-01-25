@@ -69,10 +69,7 @@ const createStore = () => {
           const item = await axios({ params: {
             i: data
           }})
-          if(items.data.Response != "False")
-            state.film = item.data
-          else
-            state.error = items.data.Error
+          state.film = item.data
         }catch (error) {
           state.error = error.response.data.Error
         }
