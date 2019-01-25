@@ -1,7 +1,8 @@
 <template>
   <main class="content">
     <div class="single">
-      <section class="movie" v-if="item">
+      <h4 v-if="error">{{ error }}</h4>
+      <section class="movie" v-else-if="item">
         <img v-lazy="item.Poster">
         <ul>
           <li>{{ item.Title }}</li>
@@ -22,6 +23,9 @@ export default {
   computed: {
     item () {
       return this.$store.state.film
+    },
+    error () {
+      return this.$store.state.error
     }
   }
 }

@@ -16,29 +16,38 @@ const createStore = () => {
         'games': 'Games'
       },
       year: '',
-      page: 1,
+      page: 0,
       leng: false,
-      film: false
+      film: false,
+      load: true
     },
     mutations: {
       async getFilms (state) {
-        const items = await axios({ params: {
-            s: state.title,
-            type: state.genre,
-            y: state.year,
-            page: state.page
-        }})
-        if(items.data.Response != "False"){
-          state.films = state.films.concat(items.data.Search)
-          state.error = false,
-          state.leng = items.data.Search.length
-        }
-        else{
-          if(state.page < 2){
-            state.error = items.data.Error
+        state.load = true
+        state.page++
+        try{
+          const items = await axios({ params: {
+              s: state.title,
+              type: state.genre,
+              y: state.year,
+              page: state.page
+          }})
+          if(items.data.Response != "False"){
+            state.films = state.films.concat(items.data.Search)
+            state.error = false,
+            state.leng = items.data.Search.length
           }
+          else{
+            if(state.page < 1){
+              state.error = items.data.Error
+            }
+            state.leng = 0
+          }
+        }catch (error) {
+          state.error = error.response.data.Error
           state.leng = 0
         }
+        state.load = false
       },
       resetFilms (state) {
         state.films = [];
@@ -53,16 +62,20 @@ const createStore = () => {
         state.year = data
       },
       resetPage (state) {
-        state.page = 1
-      },
-      nextPage (state) {
-        state.page++
+        state.page = 0
       },
       async setFilm (state, data) {
-        const item = await axios({ params: {
-          i: data
-        }})
-        state.film = item.data
+        try{
+          const item = await axios({ params: {
+            i: data
+          }})
+          if(items.data.Response != "False")
+            state.film = item.data
+          else
+            state.error = items.data.Error
+        }catch (error) {
+          state.error = error.response.data.Error
+        }
       },
       resetFilm (state) {
         state.film = false
